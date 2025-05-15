@@ -5,7 +5,7 @@ use leptos_router::{
     StaticSegment, WildcardSegment,
 };
 
-use crate::html_section::basic_layout::Basic_layout_fn;
+use crate::html_section::{basic_layout::Basic_layout_fn, meta_tags::Meta_tags_fn};
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -15,20 +15,21 @@ pub fn App() -> impl IntoView {
     view! {
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
-        <Stylesheet id="leptos" href="/pkg/actix_leptos.css"/>
+        <Stylesheet id="leptos" href="/pkg/actix_leptos.css" />
 
         // sets the document title
-        <Title text="Welcome to Leptos"/>
+        <Title text="Welcome to Leptos" />
 
         // content for this welcome page
         <Router>
-            <main>
-                <Routes fallback=move || "Not found.">
-                    <Route path=StaticSegment("") view=HomePage/>
-                    <Route path=StaticSegment("/basic_layout") view=Basic_layout_fn />
-                    <Route path=WildcardSegment("any") view=NotFound/>
-                </Routes>
-            </main>
+            // <main>
+            <Routes fallback=move || "Not found.">
+                <Route path=StaticSegment("") view=HomePage />
+                <Route path=StaticSegment("/basic_layout") view=Basic_layout_fn />
+                <Route path=StaticSegment("/meta_tags") view=Meta_tags_fn />
+                <Route path=WildcardSegment("any") view=NotFound />
+            </Routes>
+        // </main>
         </Router>
     }
 }
@@ -63,7 +64,5 @@ fn NotFound() -> impl IntoView {
         resp.set_status(actix_web::http::StatusCode::NOT_FOUND);
     }
 
-    view! {
-        <h1>"Not Found"</h1>
-    }
+    view! { <h1>"Not Found"</h1> }
 }
