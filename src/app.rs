@@ -5,6 +5,8 @@ use leptos_router::{
     StaticSegment, WildcardSegment,
 };
 
+use crate::html_section::basic_layout::Basic_layout_fn;
+
 #[component]
 pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
@@ -23,6 +25,7 @@ pub fn App() -> impl IntoView {
             <main>
                 <Routes fallback=move || "Not found.">
                     <Route path=StaticSegment("") view=HomePage/>
+                    <Route path=StaticSegment("/basic_layout") view=Basic_layout_fn />
                     <Route path=WildcardSegment("any") view=NotFound/>
                 </Routes>
             </main>
