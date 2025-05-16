@@ -5,7 +5,9 @@ use leptos_router::{
     StaticSegment, WildcardSegment,
 };
 
-use crate::html_section::{basic_layout::Basic_layout_fn, meta_tags::Meta_tags_fn};
+use crate::html_section::{
+    basic_layout::Basic_layout_fn, meta_tags::Meta_tags_fn, typography::Typography_fn,
+};
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -18,7 +20,7 @@ pub fn App() -> impl IntoView {
         <Stylesheet id="leptos" href="/pkg/actix_leptos.css" />
 
         // sets the document title
-        <Title text="Welcome to Leptos" />
+        // <Title text="Welcome to Leptos" />
 
         // content for this welcome page
         <Router>
@@ -27,6 +29,7 @@ pub fn App() -> impl IntoView {
                 <Route path=StaticSegment("") view=HomePage />
                 <Route path=StaticSegment("/basic_layout") view=Basic_layout_fn />
                 <Route path=StaticSegment("/meta_tags") view=Meta_tags_fn />
+                <Route path=StaticSegment("/typography") view=Typography_fn />
                 <Route path=WildcardSegment("any") view=NotFound />
             </Routes>
         // </main>
@@ -42,6 +45,7 @@ fn HomePage() -> impl IntoView {
     let on_click = move |_| *count.write() += 1;
 
     view! {
+        <Title text="Welcome to Leptos" />
         <h1>"Welcome to Leptos!"</h1>
         <button on:click=on_click>"Click Me: " {count}</button>
     }
