@@ -2,12 +2,12 @@
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_files::Files;
-    use actix_web::*;
-    use leptos::prelude::*;
-    use leptos::config::get_configuration;
-    use leptos_meta::MetaTags;
-    use leptos_actix::{generate_route_list, LeptosRoutes};
     use actix_leptos::app::*;
+    use actix_web::*;
+    use leptos::config::get_configuration;
+    use leptos::prelude::*;
+    use leptos_actix::{generate_route_list, LeptosRoutes};
+    use leptos_meta::MetaTags;
 
     let conf = get_configuration(None).unwrap();
     let addr = conf.leptos_options.site_addr;
@@ -21,6 +21,7 @@ async fn main() -> std::io::Result<()> {
         println!("listening on http://{}", &addr);
 
         App::new()
+            .service(Files::new("/imgs", "static/imgs").show_files_listing())
             // serve JS/WASM/CSS from `pkg`
             .service(Files::new("/pkg", format!("{site_root}/pkg")))
             // serve other assets from the `assets` directory

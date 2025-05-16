@@ -6,7 +6,8 @@ use leptos_router::{
 };
 
 use crate::html_section::{
-    basic_layout::Basic_layout_fn, meta_tags::Meta_tags_fn, typography::Typography_fn,
+    basic_layout::Basic_layout_fn, links_images::Links_images_fn, meta_tags::Meta_tags_fn,
+    typography::Typography_fn,
 };
 
 #[component]
@@ -30,6 +31,7 @@ pub fn App() -> impl IntoView {
                 <Route path=StaticSegment("/basic_layout") view=Basic_layout_fn />
                 <Route path=StaticSegment("/meta_tags") view=Meta_tags_fn />
                 <Route path=StaticSegment("/typography") view=Typography_fn />
+                <Route path=StaticSegment("/links_images") view=Links_images_fn />
                 <Route path=WildcardSegment("any") view=NotFound />
             </Routes>
         // </main>
