@@ -196,6 +196,8 @@ async fn submit_person(
         person_like,
     );
 
+    println!("{:?}", new_person);
+
     match person_age {
         0 => leptos_actix::redirect("/not_found"),
         _ => {
