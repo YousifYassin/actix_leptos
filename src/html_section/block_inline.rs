@@ -1,3 +1,4 @@
+use chrono::NaiveDate;
 use leptos::prelude::*;
 use leptos_meta::{Meta, Title};
 use serde::{Deserialize, Serialize};
@@ -51,6 +52,10 @@ pub fn Block_inline() -> impl IntoView {
                 <input id="age" type="number" min="10" max="100" name="person[age]" />
             </div>
             <div>
+                <label for="brithday"></label><br/>
+                <input id="brithday" type="date" name="person[date]" />
+            </div>
+            <div>
                 <label for="gender">"Gender"</label><br/>
                 <select id="gender" name="person[gender]">
                     <option value="Male">"Male"</option>
@@ -86,6 +91,7 @@ struct Person {
     name: Name,
     message: String,
     age: u8,
+    date: NaiveDate,
     gender: Gender,
     likes: Option<Vec<String>>,
 }
