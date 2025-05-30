@@ -108,28 +108,6 @@ const CLOSURE_DTORS = (typeof FinalizationRegistry === 'undefined')
                     wasm.__wbindgen_export_6.get(state.dtor)(state.a, state.b)
                 });
 
-function makeClosure(arg0, arg1, dtor, f) {
-                const state = { a: arg0, b: arg1, cnt: 1, dtor };
-                const real = (...args) => {
-                    // First up with a closure we increment the internal reference
-                    // count. This ensures that the Rust closure environment won't
-                    // be deallocated while we're invoking it.
-                    state.cnt++;
-                    try {
-                        return f(state.a, state.b, ...args);
-                    } finally {
-                        if (--state.cnt === 0) {
-                            wasm.__wbindgen_export_6.get(state.dtor)(state.a, state.b);
-                            state.a = 0;
-                            CLOSURE_DTORS.unregister(state);
-                        }
-                    }
-                };
-                real.original = state;
-                CLOSURE_DTORS.register(real, state, state);
-                return real;
-            }
-
 function makeMutClosure(arg0, arg1, dtor, f) {
                 const state = { a: arg0, b: arg1, cnt: 1, dtor };
                 const real = (...args) => {
@@ -147,6 +125,28 @@ function makeMutClosure(arg0, arg1, dtor, f) {
                             CLOSURE_DTORS.unregister(state);
                         } else {
                             state.a = a;
+                        }
+                    }
+                };
+                real.original = state;
+                CLOSURE_DTORS.register(real, state, state);
+                return real;
+            }
+
+function makeClosure(arg0, arg1, dtor, f) {
+                const state = { a: arg0, b: arg1, cnt: 1, dtor };
+                const real = (...args) => {
+                    // First up with a closure we increment the internal reference
+                    // count. This ensures that the Rust closure environment won't
+                    // be deallocated while we're invoking it.
+                    state.cnt++;
+                    try {
+                        return f(state.a, state.b, ...args);
+                    } finally {
+                        if (--state.cnt === 0) {
+                            wasm.__wbindgen_export_6.get(state.dtor)(state.a, state.b);
+                            state.a = 0;
+                            CLOSURE_DTORS.unregister(state);
                         }
                     }
                 };
@@ -229,7 +229,7 @@ wasm._dyn_core__ops__function__FnMut_____Output___R_as_wasm_bindgen__closure__Wa
 }
 
 function __wbg_adapter_41(arg0, arg1, arg2) {
-wasm.closure694_externref_shim(arg0, arg1, arg2);
+wasm.closure705_externref_shim(arg0, arg1, arg2);
 }
 
 function __wbg_adapter_44(arg0, arg1) {
@@ -237,15 +237,15 @@ wasm._dyn_core__ops__function__Fn_____Output___R_as_wasm_bindgen__closure__WasmC
 }
 
 function __wbg_adapter_47(arg0, arg1, arg2) {
-wasm.closure727_externref_shim(arg0, arg1, arg2);
+wasm.closure739_externref_shim(arg0, arg1, arg2);
 }
 
 function __wbg_adapter_50(arg0, arg1, arg2) {
-wasm.closure843_externref_shim(arg0, arg1, arg2);
+wasm.closure855_externref_shim(arg0, arg1, arg2);
 }
 
 function __wbg_adapter_358(arg0, arg1, arg2, arg3) {
-wasm.closure869_externref_shim(arg0, arg1, arg2, arg3);
+wasm.closure881_externref_shim(arg0, arg1, arg2, arg3);
 }
 
 const __wbindgen_enum_ReadableStreamType = ["bytes"];
@@ -1202,24 +1202,24 @@ return true;
 const ret = false;
 return ret;
 };
-imports.wbg.__wbindgen_closure_wrapper10561 = function(arg0, arg1, arg2) {
-const ret = makeClosure(arg0, arg1, 708, __wbg_adapter_44);
+imports.wbg.__wbindgen_closure_wrapper10161 = function(arg0, arg1, arg2) {
+const ret = makeMutClosure(arg0, arg1, 704, __wbg_adapter_38);
 return ret;
 };
-imports.wbg.__wbindgen_closure_wrapper10890 = function(arg0, arg1, arg2) {
-const ret = makeMutClosure(arg0, arg1, 728, __wbg_adapter_47);
+imports.wbg.__wbindgen_closure_wrapper10163 = function(arg0, arg1, arg2) {
+const ret = makeMutClosure(arg0, arg1, 706, __wbg_adapter_41);
 return ret;
 };
-imports.wbg.__wbindgen_closure_wrapper16978 = function(arg0, arg1, arg2) {
-const ret = makeMutClosure(arg0, arg1, 844, __wbg_adapter_50);
+imports.wbg.__wbindgen_closure_wrapper10793 = function(arg0, arg1, arg2) {
+const ret = makeClosure(arg0, arg1, 719, __wbg_adapter_44);
 return ret;
 };
-imports.wbg.__wbindgen_closure_wrapper9929 = function(arg0, arg1, arg2) {
-const ret = makeMutClosure(arg0, arg1, 693, __wbg_adapter_38);
+imports.wbg.__wbindgen_closure_wrapper11129 = function(arg0, arg1, arg2) {
+const ret = makeMutClosure(arg0, arg1, 740, __wbg_adapter_47);
 return ret;
 };
-imports.wbg.__wbindgen_closure_wrapper9931 = function(arg0, arg1, arg2) {
-const ret = makeMutClosure(arg0, arg1, 695, __wbg_adapter_41);
+imports.wbg.__wbindgen_closure_wrapper17227 = function(arg0, arg1, arg2) {
+const ret = makeMutClosure(arg0, arg1, 856, __wbg_adapter_50);
 return ret;
 };
 imports.wbg.__wbindgen_debug_string = function(arg0, arg1) {

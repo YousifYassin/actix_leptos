@@ -36,11 +36,33 @@ pub fn Block_inline() -> impl IntoView {
         <ActionForm action=submit>
             <div>
                 <label for="first_name">"Frist name"</label><br/>
-                <input id="first_name" type="text" name="first_name" />
+                <input id="first_name" type="text" name="person[name][first_name]" />
             </div>
             <div>
                 <label for="last_name">"last name"</label><br/>
-                <input id="last_name" type="text" name="last_name" />
+                <input id="last_name" type="text" name="person[name][last_name]" />
+            </div>
+            <div>
+                <label for="message">"Message"</label><br/>
+                <textarea id="message" name="person[message]" cols="30" rows="10"></textarea>
+            </div>
+            <div>
+                <label for="age">"Age"</label><br/>
+                <input id="age" type="number" min="10" max="100" name="person[age]" />
+            </div>
+            <div>
+                <label for="gender">"Gender"</label><br/>
+                <select id="gender" name="person[gender]">
+                    <option value="Male">"Male"</option>
+                    <option value="Female" >"Female"</option>
+                </select>
+            </div>
+            <div>
+                <label for="likes">"likes"</label><br/>
+                <input id="likes" type="checkbox" value="Programming" name="person[likes][]"/>"Programming"
+                <input id="likes" type="checkbox" value="Gameing" name="person[likes][]"/>"Gameing"
+                <input id="likes" type="checkbox" value="Reading" name="person[likes][]"/>"Reading"
+                <input id="likes" type="checkbox" value="Pray" name="person[likes][]"/>"Pray"
             </div>
             <input type="submit" />
         </ActionForm>
@@ -48,17 +70,28 @@ pub fn Block_inline() -> impl IntoView {
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
-struct Person {
+struct Name {
     first_name: String,
     last_name: String,
 }
 
+#[derive(Debug, Serialize, Deserialize, Clone)]
+enum Gender {
+    Male,
+    Female,
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+struct Person {
+    name: Name,
+    message: String,
+    age: u8,
+    gender: Gender,
+    likes: Option<Vec<String>>,
+}
+
 #[server]
-async fn person_form(first_name: String, last_name: String) -> Result<(), ServerFnError> {
-    let person = Person {
-        first_name,
-        last_name,
-    };
+async fn person_form(person: Person) -> Result<(), ServerFnError> {
     println!("{person:#?}");
     Ok(())
 }

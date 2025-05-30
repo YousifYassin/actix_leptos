@@ -202,7 +202,7 @@ async fn submit_person(
         0 => leptos_actix::redirect("/not_found"),
         _ => {
             println!("{:?}", new_person);
-            leptos_actix::redirect("/forms_input")
+            leptos_actix::redirect("/block_inlines")
         }
     }
     Ok(())
