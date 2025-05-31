@@ -1,6 +1,8 @@
 pub mod basic_layout;
 pub mod block_inline;
+pub mod entities;
 pub mod forms_input;
+pub mod id_class;
 pub mod links_images;
 pub mod lists_tables;
 pub mod meta_tags;
